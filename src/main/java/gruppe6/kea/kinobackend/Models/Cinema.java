@@ -1,30 +1,35 @@
 package gruppe6.kea.kinobackend.Models;
 
 import gruppe6.kea.kinobackend.Models.Enums.Authlevel;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Cinema {
 
    @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
    @Column(unique = true)
-    private String username;
+    private String name;
 
-    private String password;
+  @ManyToMany
+  @JoinTable(name = "cinema_user",joinColumns = @JoinColumn(name = "cinema_id"),inverseJoinColumns = @JoinColumn(name = "user_id"))
+   private List<User> userList;
 
-    private Authlevel authlevel;
 
     public Cinema() {
     }
 
-    public Cinema(String username, String password, Authlevel authlevel) {
-        this.username = username;
-        this.password = password;
-        this.authlevel = authlevel;
+    public Cinema(String name, List<User> userList) {
+        this.name = name;
+        this.userList = userList;
+    }
+
+    public Cinema(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -35,27 +40,19 @@ public class Cinema {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Authlevel getAuthlevel() {
-        return authlevel;
-    }
-
-    public void setAuthlevel(Authlevel authlevel) {
-        this.authlevel = authlevel;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }
