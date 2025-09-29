@@ -4,6 +4,7 @@ package gruppe6.kea.kinobackend.Models;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 public class Show {
@@ -23,6 +24,9 @@ public class Show {
    @ManyToOne
    @JoinColumn(name = "movie_id")
     private Movie movie;
+
+   @ManyToMany(mappedBy = "showList")
+    private List<Seat> seatList;
 
 
 
