@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 public class Movie {
@@ -27,16 +28,30 @@ public class Movie {
     @Column(length = 3)
     private int ageLimit;
 
+    @OneToMany(mappedBy = "movie")
+    private List<Show> showList;
+
+
     public Movie() {
     }
 
-    public Movie(String title, int ageLimit, Category category, String posterImage, String description, LocalTime duration) {
+    public Movie(String title, LocalTime duration, String description, String posterImage, Category category, int ageLimit, List<Show> showList) {
         this.title = title;
-        this.ageLimit = ageLimit;
-        this.category = category;
-        this.posterImage = posterImage;
-        this.description = description;
         this.duration = duration;
+        this.description = description;
+        this.posterImage = posterImage;
+        this.category = category;
+        this.ageLimit = ageLimit;
+        this.showList = showList;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId() {
@@ -47,28 +62,20 @@ public class Movie {
         this.id = id;
     }
 
-    public LocalTime getDuration() {
-        return duration;
-    }
-
-    public void setDuration(LocalTime duration) {
-        this.duration = duration;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalTime getDuration() {
+        return duration;
+    }
+
+    public void setDuration(LocalTime duration) {
+        this.duration = duration;
     }
 
     public String getPosterImage() {
@@ -93,5 +100,13 @@ public class Movie {
 
     public void setAgeLimit(int ageLimit) {
         this.ageLimit = ageLimit;
+    }
+
+    public List<Show> getShowList() {
+        return showList;
+    }
+
+    public void setShowList(List<Show> showList) {
+        this.showList = showList;
     }
 }

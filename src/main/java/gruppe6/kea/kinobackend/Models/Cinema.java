@@ -19,6 +19,9 @@ public class Cinema {
   @JoinTable(name = "cinema_user",joinColumns = @JoinColumn(name = "cinema_id"),inverseJoinColumns = @JoinColumn(name = "user_id"))
    private List<User> userList;
 
+ @OneToMany(mappedBy = "cinema")
+  private List<Theatre> theatreList;
+
 
     public Cinema() {
     }
@@ -30,6 +33,12 @@ public class Cinema {
 
     public Cinema(String name) {
         this.name = name;
+    }
+
+    public Cinema(String name, List<User> userList, List<Theatre> theatreList) {
+        this.name = name;
+        this.userList = userList;
+        this.theatreList = theatreList;
     }
 
     public int getId() {
@@ -54,5 +63,13 @@ public class Cinema {
 
     public void setUserList(List<User> userList) {
         this.userList = userList;
+    }
+
+    public List<Theatre> getTheatreList() {
+        return theatreList;
+    }
+
+    public void setTheatreList(List<Theatre> theatreList) {
+        this.theatreList = theatreList;
     }
 }
