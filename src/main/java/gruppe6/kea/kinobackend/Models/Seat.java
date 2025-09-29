@@ -8,8 +8,8 @@ public class Seat {
     @Id
     private int id;
 
-   @Column(length = 1)
-    private char row;
+   @Column()
+    private int row;
 
     private int seatNumber;
 
@@ -35,11 +35,11 @@ public class Seat {
         this.id = id;
     }
 
-    public char getRow() {
+    public int getRow() {
         return row;
     }
 
-    public void setRow(char row) {
+    public void setRow(int row) {
         this.row = row;
     }
 
