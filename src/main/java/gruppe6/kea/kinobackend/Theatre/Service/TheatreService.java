@@ -21,5 +21,11 @@ public class TheatreService {
     return theatreRepository.findAll();
     }
 
+    public List<Theatre> getTheatreById(int id) {
+        List<Theatre> result = new ArrayList<>();
+        theatreRepository.findById(id);
+        return result;
+    }
+
 
 }
