@@ -27,12 +27,12 @@ public class MovieController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/post")
+    @PostMapping("")
     public Movie createMovie(@RequestBody Movie movie){
         return movieService.createMovie(movie);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable int id){
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
