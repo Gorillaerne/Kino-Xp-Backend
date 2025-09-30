@@ -3,18 +3,20 @@ package gruppe6.kea.kinobackend.Models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "shows")
 public class Show {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
 
     @Column(nullable = false)
-    private LocalTime showTime;
+    private LocalDateTime showTime;
 
 
     @ManyToOne
@@ -25,11 +27,60 @@ public class Show {
    @JoinColumn(name = "movie_id")
     private Movie movie;
 
-   @ManyToMany(mappedBy = "showList")
-    private List<Seat> seatList;
+   @OneToMany(mappedBy = "show")
+    private List<BookedSeats> bookedSeats;
 
+   @OneToMany(mappedBy = "show")
+    private List<Reservation> reservations;
 
+    public Show() {
+    }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public List<BookedSeats> getBookedSeats() {
+        return bookedSeats;
+    }
+
+    public void setBookedSeats(List<BookedSeats> bookedSeats) {
+        this.bookedSeats = bookedSeats;
+    }
+
+    public Theatre getTheatre() {
+        return theatre;
+    }
+
+    public void setTheatre(Theatre theatre) {
+        this.theatre = theatre;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public LocalDateTime getShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(LocalDateTime showTime) {
+        this.showTime = showTime;
+    }
 }
