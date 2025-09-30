@@ -4,7 +4,6 @@ import gruppe6.kea.kinobackend.Models.Theatre;
 import gruppe6.kea.kinobackend.Theatre.Repository.TheatreRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ public class TheatreService {
 
     private final TheatreRepository theatreRepository;
 
-    public TheatreService(RestTemplate restTemplate, TheatreRepository theatreRepository) {
+    public TheatreService(TheatreRepository theatreRepository) {
         this.theatreRepository = theatreRepository;
     }
 
