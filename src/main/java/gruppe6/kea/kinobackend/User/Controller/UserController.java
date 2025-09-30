@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 //Endpoint sådan her!!!!!!!!!!!!!!
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;

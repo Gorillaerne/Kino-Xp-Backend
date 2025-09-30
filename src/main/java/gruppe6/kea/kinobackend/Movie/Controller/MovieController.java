@@ -3,12 +3,14 @@ package gruppe6.kea.kinobackend.Movie.Controller;
 import gruppe6.kea.kinobackend.Models.Movie;
 import gruppe6.kea.kinobackend.Movie.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/movies")
 public class MovieController {
 
@@ -16,6 +18,7 @@ public class MovieController {
     MovieService movieService;
 
     @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
     public List<Movie> getMovies(){
         return movieService.getAllMovies();
     }
