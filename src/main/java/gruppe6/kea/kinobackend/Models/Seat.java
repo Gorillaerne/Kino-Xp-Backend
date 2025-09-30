@@ -8,9 +8,10 @@ import java.util.List;
 public class Seat {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-   @Column()
+    @Column(name = "seat_row")
     private int row;
 
     private int seatNumber;
@@ -20,18 +21,10 @@ public class Seat {
     private Theatre theatre;
 
 
-    @ManyToMany
-    @JoinTable(name ="booked_seats", joinColumns = @JoinColumn(name = "seat_id"),inverseJoinColumns = @JoinColumn(name="show_id"))
-    private List<Show> showList;
+    @OneToMany(mappedBy = "seat")
+    private List<BookedSeats> bookedSeats;
 
     public Seat() {
-    }
-
-    public Seat(int row, int seatNumber, Theatre theatre, List<Show> showList) {
-        this.row = row;
-        this.seatNumber = seatNumber;
-        this.theatre = theatre;
-        this.showList = showList;
     }
 
     public int getId() {
@@ -42,12 +35,20 @@ public class Seat {
         this.id = id;
     }
 
-    public int getRow() {
-        return row;
+    public List<BookedSeats> getBookedSeats() {
+        return bookedSeats;
     }
 
-    public void setRow(int row) {
-        this.row = row;
+    public void setBookedSeats(List<BookedSeats> bookedSeats) {
+        this.bookedSeats = bookedSeats;
+    }
+
+    public Theatre getTheatre() {
+        return theatre;
+    }
+
+    public void setTheatre(Theatre theatre) {
+        this.theatre = theatre;
     }
 
     public int getSeatNumber() {
@@ -58,11 +59,11 @@ public class Seat {
         this.seatNumber = seatNumber;
     }
 
-    public Theatre getTheatre() {
-        return theatre;
+    public int getRow() {
+        return row;
     }
 
-    public void setTheatre(Theatre theatre) {
-        this.theatre = theatre;
+    public void setRow(int row) {
+        this.row = row;
     }
 }
