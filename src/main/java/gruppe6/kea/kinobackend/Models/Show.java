@@ -1,6 +1,7 @@
 package gruppe6.kea.kinobackend.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -31,6 +32,7 @@ public class Show {
     private List<BookedSeats> bookedSeats;
 
    @OneToMany(mappedBy = "show")
+   @JsonBackReference
     private List<Reservation> reservations;
 
     public Show() {
