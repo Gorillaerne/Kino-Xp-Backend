@@ -1,5 +1,6 @@
 package gruppe6.kea.kinobackend.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -23,11 +24,13 @@ public class Reservation {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "reservation")
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
+    @JsonManagedReference // bidirektionelle relationer, jackson ender i et uendeligt loop når den prøver at lave JSON.
     private List<Ticket> ticketList;
 
     @ManyToOne
     @JoinColumn(name = "show_id")
+    @JsonManagedReference // bidirektionelle relationer, jackson ender i et uendeligt loop når den prøver at lave JSON.
     private Show show;
 
     public Reservation() {
