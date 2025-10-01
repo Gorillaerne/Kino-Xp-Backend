@@ -39,4 +39,16 @@ private final IMovieRepository iMovieRepository;
     public List<Show> findAll() {
         return iShowRepository.findAll();
     }
+
+    public boolean deleteShowFromId(int id) {
+        Show foundShow = iShowRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Show not found"));
+
+        iShowRepository.delete(foundShow);
+        if (iShowRepository.findById(foundShow.getId()).isPresent()){
+            return false;
+        }else {
+            return true;
+        }
+
+    }
 }

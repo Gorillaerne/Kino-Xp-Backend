@@ -1,6 +1,7 @@
 package gruppe6.kea.kinobackend.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gruppe6.kea.kinobackend.Models.Enums.Category;
 import jakarta.persistence.*;
@@ -31,7 +32,7 @@ public class Movie {
     private int ageLimit;
 
     @OneToMany(mappedBy = "movie")
-    @JsonManagedReference("show-movie")
+    @JsonIgnore
     private List<Show> showList;
 
 
