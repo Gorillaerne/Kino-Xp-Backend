@@ -1,5 +1,6 @@
 package gruppe6.kea.kinobackend.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gruppe6.kea.kinobackend.Models.Enums.Authlevel;
 import jakarta.persistence.*;
