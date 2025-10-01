@@ -38,4 +38,9 @@ public class ShowController {
 return new ResponseEntity<>(showService.postNewShow(show),HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteShowFromId(@PathVariable int id){
+        return new ResponseEntity<>(showService.deleteShowFromId(id),HttpStatus.OK);
+    }
+
 }
