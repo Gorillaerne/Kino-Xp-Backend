@@ -29,7 +29,7 @@ public class MovieController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+ 
     @PostMapping("")
     public Movie createMovie(@RequestBody Movie movie){
         return movieService.createMovie(movie);
