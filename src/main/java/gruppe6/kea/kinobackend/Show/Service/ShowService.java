@@ -5,6 +5,7 @@ import gruppe6.kea.kinobackend.Show.Repository.IShowRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,6 +19,14 @@ public class ShowService {
 
     public Show getShowById(int id) {
         return iShowRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Seat not found with id:" + id));
+    }
+
+    public Show addShow(Show show) {
+        return iShowRepository.save(show);
+    }
+
+    public List<Show> getAllShows() {
+        return iShowRepository.findAll();
     }
 
 }
