@@ -1,3 +1,10 @@
+DROP TABLE kinoxp;
+CREATE TABLE kinoxp (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL
+);
+USE kinoxp;
+
 INSERT INTO cinema (id, name) VALUES
                                   (1, 'CineMax'),
                                   (2, 'MoviePalace');
