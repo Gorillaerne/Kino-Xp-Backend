@@ -23,16 +23,14 @@ public class Show {
 
     @ManyToOne
     @JoinColumn(name = "theatre_id")
-    @JsonBackReference
     private Theatre theatre;
 
    @ManyToOne
    @JoinColumn(name = "movie_id")
-   @JsonBackReference
-   private Movie movie;
+    private Movie movie;
 
    @OneToMany(mappedBy = "show")
-   private List<BookedSeats> bookedSeats;
+    private List<BookedSeats> bookedSeats;
 
    @OneToMany(mappedBy = "show")
    @JsonManagedReference("show-reservation")
