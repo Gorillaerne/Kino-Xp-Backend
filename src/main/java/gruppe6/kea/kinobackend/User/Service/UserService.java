@@ -33,7 +33,7 @@ public class UserService {
         if (dbUser == null || !checkPassword(login.getPassword(), dbUser.getPassword())) {
             throw new BadCredentialsException("Invalid username or password");
         }
-            return new LoginResponseDTO(dbUser.getUsername(),dbUser.getAuthlevel(),dbUser.getCinemas());
+            return new LoginResponseDTO(dbUser.getId(),dbUser.getUsername(),dbUser.getAuthlevel(),dbUser.getCinemas());
     }
 
     public User createNewUser(User user) {
@@ -43,5 +43,9 @@ public class UserService {
             return userRepository.save(user);
         }
         throw new ResponseStatusException(HttpStatus.CONFLICT, "Username already exists");
+    }
+
+    public User findById(int id) {
+        return userRepository.findById(id).orElseThrow(() -> new BadCredentialsException("User with id: " + id + " doesnt exist"));
     }
 }
