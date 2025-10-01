@@ -22,4 +22,11 @@ public class ShowController {
         return ResponseEntity.ok(show);
     }
 
+//    @PostMapping
+//    public ResponseEntity<?> postNewShow(@RequestBody Show show){
+//
+//
+//
+//    }
+
 }

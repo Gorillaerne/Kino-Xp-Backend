@@ -1,5 +1,7 @@
 package gruppe6.kea.kinobackend.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gruppe6.kea.kinobackend.Models.Enums.Category;
 import jakarta.persistence.*;
 
@@ -22,13 +24,14 @@ public class Movie {
 
     @Column(length = 999999999)
     private String posterImage;
-
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     @Column(length = 3)
     private int ageLimit;
 
     @OneToMany(mappedBy = "movie")
+    @JsonManagedReference("show-movie")
     private List<Show> showList;
 
 

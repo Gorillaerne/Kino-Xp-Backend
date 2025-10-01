@@ -1,6 +1,7 @@
 package gruppe6.kea.kinobackend.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gruppe6.kea.kinobackend.Models.Enums.Authlevel;
 import jakarta.persistence.*;
 
@@ -18,10 +19,11 @@ public class Cinema {
 
   @ManyToMany
   @JoinTable(name = "cinema_user",joinColumns = @JoinColumn(name = "cinema_id"),inverseJoinColumns = @JoinColumn(name = "user_id"))
+  @JsonManagedReference("cinema-user")
    private List<User> userList;
 
  @OneToMany(mappedBy = "cinema")
- @JsonBackReference
+ @JsonManagedReference("cinema-theatre")
   private List<Theatre> theatreList;
 
 

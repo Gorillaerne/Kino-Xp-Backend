@@ -1,6 +1,7 @@
 package gruppe6.kea.kinobackend.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +18,7 @@ public class Ticket {
     private Reservation reservation;
 
     @OneToOne
+    @JsonManagedReference("bookedseats-ticket")
     private BookedSeats bookedSeat;
 
     public Ticket() {

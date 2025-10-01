@@ -8,7 +8,9 @@ public enum Category {
     DRAMA("Drama"),
     THRILLER("Thriller"),
     DOCUMENTARY("Documentary"),
-    FANTASY("Fantasy");
+    FANTASY("Fantasy"),
+    FAMILY("Family"),
+    SCIFI("Sci-fi");
 
     public final String displayName;
 

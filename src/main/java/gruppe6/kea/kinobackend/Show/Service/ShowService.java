@@ -17,7 +17,7 @@ public class ShowService {
     }
 
     public Show getShowById(int id) {
-        return iShowRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Seat not found with id:" + id));
+        return iShowRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Show not found with id:" + id));
     }
 
 }

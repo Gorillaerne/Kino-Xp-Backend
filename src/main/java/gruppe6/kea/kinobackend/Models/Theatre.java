@@ -1,6 +1,7 @@
 package gruppe6.kea.kinobackend.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,14 +19,16 @@ public class Theatre {
 
     @ManyToOne
     @JoinColumn(name = "cinema_id")
-    @JsonBackReference
+    @JsonBackReference("cinema-theatre")
     private Cinema cinema;
 
     @OneToMany(mappedBy = "theatre")
+    @JsonManagedReference("theatre-show")
     private List<Show> showList;
 
 
     @OneToMany(mappedBy = "theatre")
+    @JsonManagedReference("theatre-seat")
     private List<Seat> seatList;
 
     public Theatre() {
