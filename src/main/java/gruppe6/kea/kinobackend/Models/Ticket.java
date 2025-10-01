@@ -13,7 +13,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")
-    @JsonBackReference
+    @JsonBackReference("reservation-ticket")
     private Reservation reservation;
 
     @OneToOne
