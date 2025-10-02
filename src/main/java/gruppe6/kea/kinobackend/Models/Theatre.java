@@ -23,7 +23,7 @@ public class Theatre {
     private Cinema cinema;
 
     @OneToMany(mappedBy = "theatre")
-    @JsonBackReference("theatre-show")
+    @JsonManagedReference("theatre-show")
     private List<Show> showList;
 
 

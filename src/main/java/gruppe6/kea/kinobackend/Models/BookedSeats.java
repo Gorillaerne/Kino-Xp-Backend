@@ -12,7 +12,7 @@ public class BookedSeats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name="show_id", nullable=false)
     @JsonBackReference("show-bookedseats")
     private Show show;

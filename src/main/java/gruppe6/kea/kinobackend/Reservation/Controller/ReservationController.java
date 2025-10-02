@@ -31,12 +31,6 @@ public class ReservationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedReservation);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReservationById(@PathVariable int id) {
-        reservationService.deleteReservationById(id);
-        return ResponseEntity.noContent().build();
-    }
-
 
 
 }

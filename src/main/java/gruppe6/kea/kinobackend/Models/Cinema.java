@@ -19,7 +19,7 @@ public class Cinema {
 
   @ManyToMany
   @JoinTable(name = "cinema_user",joinColumns = @JoinColumn(name = "cinema_id"),inverseJoinColumns = @JoinColumn(name = "user_id"))
-  @JsonBackReference("cinema-user")
+  @JsonManagedReference("cinema-user")
    private List<User> userList;
 
  @OneToMany(mappedBy = "cinema")

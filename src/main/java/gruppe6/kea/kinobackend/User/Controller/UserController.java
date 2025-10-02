@@ -21,12 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
-    @GetMapping("/{userID}")
-    public ResponseEntity<User> getUserById(@PathVariable int userID){
-        return new ResponseEntity<>(userService.findById(userID),HttpStatus.OK);
-    }
-
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public LoginResponseDTO login(@RequestBody LoginRequestDTO login){

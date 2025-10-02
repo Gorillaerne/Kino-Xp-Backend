@@ -7,8 +7,6 @@ import java.util.List;
 
 public class LoginResponseDTO {
 
-    private int id;
-
     private String username;
 
     private Authlevel authlevel;
@@ -18,8 +16,7 @@ public class LoginResponseDTO {
     public LoginResponseDTO() {
     }
 
-    public LoginResponseDTO(int id, String username, Authlevel authlevel, List<Cinema> cinemas) {
-        this.id = id;
+    public LoginResponseDTO(String username, Authlevel authlevel, List<Cinema> cinemas) {
         this.username = username;
         this.authlevel = authlevel;
         this.cinemas = cinemas;
@@ -47,13 +44,5 @@ public class LoginResponseDTO {
 
     public void setAuthlevel(Authlevel authlevel) {
         this.authlevel = authlevel;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

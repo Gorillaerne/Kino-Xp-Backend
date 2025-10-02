@@ -1,7 +1,5 @@
 package gruppe6.kea.kinobackend.Movie.Controller;
 
-import gruppe6.kea.kinobackend.DTO.CategoryDTO;
-import gruppe6.kea.kinobackend.Models.Enums.Category;
 import gruppe6.kea.kinobackend.Models.Movie;
 import gruppe6.kea.kinobackend.Movie.Service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +16,6 @@ public class MovieController {
 
     @Autowired
     MovieService movieService;
-
-    @GetMapping("/categories")
-    public ResponseEntity<List<CategoryDTO>> getCategories(){
-        return new ResponseEntity<>(movieService.getCategories(),HttpStatus.OK);
-    }
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)

@@ -23,18 +23,19 @@ public class Show {
 
     @ManyToOne
     @JoinColumn(name = "theatre_id")
-    @JsonManagedReference("theatre-show")
+    @JsonBackReference("theatre-show")
     private Theatre theatre;
 
    @ManyToOne
    @JoinColumn(name = "movie_id")
+   @JsonBackReference("show-movie")
     private Movie movie;
 
-   @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+   @OneToMany(mappedBy = "show")
    @JsonManagedReference("show-bookedseats")
     private List<BookedSeats> bookedSeats;
 
-   @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+   @OneToMany(mappedBy = "show")
    @JsonManagedReference("show-reservation")
     private List<Reservation> reservations;
 

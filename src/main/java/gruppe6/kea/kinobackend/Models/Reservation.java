@@ -25,7 +25,7 @@ public class Reservation {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
     @JsonManagedReference("reservation-ticket") // bidirektionelle relationer, jackson ender i et uendeligt loop når den prøver at lave JSON.
     private List<Ticket> ticketList;
 
