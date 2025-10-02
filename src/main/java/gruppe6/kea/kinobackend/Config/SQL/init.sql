@@ -95,11 +95,11 @@ INSERT INTO seat (id, seat_row, seat_number, theatre_id) VALUES
 -- MOVIES
 -- ========================
 INSERT INTO movie (id, title, duration, description, poster_image, category, age_limit) VALUES
-                                                                                            (1, 'Inception', '02:28:00', 'A mind-bending thriller', 'poster_inception.jpg', 'ACTION', 13),
-                                                                                            (2, 'Finding Nemo', '01:40:00', 'Animated ocean adventure', 'poster_nemo.jpg', 'FAMILY', 0),
-                                                                                            (3, 'The Dark Knight', '02:32:00', 'Batman vs Joker', 'poster_darkknight.jpg', 'ACTION', 15),
-                                                                                            (4, 'Interstellar', '02:49:00', 'Journey through space and time', 'poster_interstellar.jpg', 'SCIFI', 10),
-                                                                                            (5, 'Frozen', '01:42:00', 'Disney musical fantasy', 'poster_frozen.jpg', 'FAMILY', 0);
+                                                                                            (1, 'Inception', '02:28:00', 'A mind-bending thriller', 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg', 'ACTION', 13),
+                                                                                            (2, 'Finding Nemo', '01:40:00', 'Animated ocean adventure', 'https://m.media-amazon.com/images/I/51OObBWLwDL._UF894,1000_QL80_.jpg', 'FAMILY', 0),
+                                                                                            (3, 'The Dark Knight', '02:32:00', 'Batman vs Joker', 'https://static.posters.cz/image/1300/198201.jpg', 'ACTION', 15),
+                                                                                            (4, 'Interstellar', '02:49:00', 'Journey through space and time', 'https://cdn11.bigcommerce.com/s-yzgoj/images/stencil/1280x1280/products/2904140/5945296/MOVEB14245__04462.1679590992.jpg?c=2', 'SCIFI', 10),
+                                                                                            (5, 'Frozen', '01:42:00', 'Disney musical fantasy', 'https://static.posters.cz/image/750/19238.jpg', 'FAMILY', 0);
 
 -- ========================
 -- SHOWS
