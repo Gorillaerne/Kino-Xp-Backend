@@ -7,6 +7,7 @@ import gruppe6.kea.kinobackend.Show.Repository.IShowRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.proxy.EntityNotFoundDelegate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -24,9 +25,11 @@ public class ReservationService {
     }
 
     public Reservation findById(int id) {
-        return iReservationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Reservation not found with id: " + id));
+        return iReservationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation not found with id: " + id));
     }
 
+    @Transactional
     public Reservation createReservation(Reservation reservation) {
 
         // 1 Hent show fra DB
@@ -66,6 +69,14 @@ public class ReservationService {
         }
 
         return savedReservation;
+    }
+
+    @Transactional
+    public void deleteReservationById(int id) {
+        Reservation reservation = iReservationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation not found"));
+
+        iReservationRepository.delete(reservation);
     }
 
 

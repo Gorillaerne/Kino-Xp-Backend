@@ -1,6 +1,7 @@
 package gruppe6.kea.kinobackend.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gruppe6.kea.kinobackend.Models.Enums.Category;
 import jakarta.persistence.*;
@@ -19,7 +20,7 @@ public class Movie {
     private String title;
 
     private LocalTime duration;
-
+@Column(length = 99999999)
     private String description;
 
     @Column(length = 999999999)
@@ -30,8 +31,8 @@ public class Movie {
     @Column(length = 3)
     private int ageLimit;
 
-    @OneToMany(mappedBy = "movie")
-    @JsonManagedReference("show-movie")
+    @OneToMany(mappedBy = "movie", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Show> showList;
 
 
