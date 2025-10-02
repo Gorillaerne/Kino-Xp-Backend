@@ -17,7 +17,7 @@ public class Ticket {
     @JsonBackReference("reservation-ticket")
     private Reservation reservation;
 
-    @OneToOne
+    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("bookedseats-ticket")
     private BookedSeats bookedSeat;
 
