@@ -20,7 +20,7 @@ public class Movie {
     private String title;
 
     private LocalTime duration;
-
+@Column(length = 99999999)
     private String description;
 
     @Column(length = 999999999)
@@ -31,7 +31,7 @@ public class Movie {
     @Column(length = 3)
     private int ageLimit;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Show> showList;
 
