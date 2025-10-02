@@ -20,7 +20,7 @@ public class Movie {
     private String title;
 
     private LocalTime duration;
-
+@Column(length = 99999999)
     private String description;
 
     @Column(length = 999999999)
