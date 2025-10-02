@@ -31,7 +31,7 @@ public class Movie {
     @Column(length = 3)
     private int ageLimit;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Show> showList;
 
