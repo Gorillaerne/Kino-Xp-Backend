@@ -6,14 +6,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/cinema")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/cinemas")
 public class CinemaController {
 
     private final CinemaService cinemaService;
 
     public CinemaController(CinemaService cinemaService) {
         this.cinemaService = cinemaService;
+    }
+
+
+    @GetMapping("")
+    public ResponseEntity<List<Cinema>> getAllCinemas(){
+        return new ResponseEntity<>(cinemaService.findAll(),HttpStatus.OK);
+
+
     }
 
     @PostMapping("")
