@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -23,6 +24,13 @@ public class MovieController {
     public ResponseEntity<List<CategoryDTO>> getCategories(){
         return new ResponseEntity<>(movieService.getCategories(),HttpStatus.OK);
     }
+
+
+    @GetMapping("/active/{cinemaId}")
+    public ResponseEntity<Set<Movie>> getAllActiveMoviesFromCinemaID(@PathVariable int cinemaId){
+        return new ResponseEntity<>(movieService.getAllActiveMoviesFromCinemaID(cinemaId),HttpStatus.OK);
+    }
+
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)

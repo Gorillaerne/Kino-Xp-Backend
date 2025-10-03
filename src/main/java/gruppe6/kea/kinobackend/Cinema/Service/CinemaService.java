@@ -5,6 +5,8 @@ import gruppe6.kea.kinobackend.Models.Cinema;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CinemaService {
 
@@ -28,5 +30,9 @@ public class CinemaService {
                 .orElseThrow(() -> new EntityNotFoundException("Cinema not found"));
 
         iCinemaRepository.delete(cinema);
+    }
+
+    public List<Cinema> findAll() {
+      return iCinemaRepository.findAll();
     }
 }
