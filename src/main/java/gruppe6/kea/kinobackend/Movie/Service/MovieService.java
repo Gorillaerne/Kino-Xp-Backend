@@ -9,6 +9,7 @@ import gruppe6.kea.kinobackend.Models.Movie;
 import gruppe6.kea.kinobackend.Models.Show;
 import gruppe6.kea.kinobackend.Models.Theatre;
 import gruppe6.kea.kinobackend.Movie.Repository.IMovieRepository;
+import gruppe6.kea.kinobackend.Show.Repository.IShowRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,12 @@ public class MovieService {
 
     private final ICinemaRepository cinemaRepository;
     private final IMovieRepository iMovieRepository;
+    private final IShowRepository showRepository;
 
-    public MovieService(ICinemaRepository cinemaRepository, IMovieRepository iMovieRepository){
+    public MovieService(ICinemaRepository cinemaRepository, IMovieRepository iMovieRepository, IShowRepository showRepository){
         this.cinemaRepository = cinemaRepository;
         this.iMovieRepository = iMovieRepository;
+        this.showRepository = showRepository;
     }
 
     public List<Movie> getAllMovies(){
@@ -72,6 +75,18 @@ public class MovieService {
 
 
         return movieSet;
+    }
+
+    public Set<Movie> getAllActiveMovies() {
+        List<Show> showList = showRepository.findAll();
+        Set<Movie> activeMovies = new HashSet<>();
+
+        for (Show show : showList){
+            if (show.getShowTime().isAfter(LocalDateTime.now())){
+                activeMovies.add(show.getMovie());
+            }
+        }
+        return activeMovies;
     }
 }
 

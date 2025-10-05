@@ -31,6 +31,11 @@ public class MovieController {
         return new ResponseEntity<>(movieService.getAllActiveMoviesFromCinemaID(cinemaId),HttpStatus.OK);
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<Set<Movie>> getAllActiveMovies(){
+        return new ResponseEntity<>(movieService.getAllActiveMovies(),HttpStatus.OK);
+    }
+
 
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
