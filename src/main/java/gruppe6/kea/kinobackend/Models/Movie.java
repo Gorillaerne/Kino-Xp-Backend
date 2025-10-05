@@ -17,21 +17,23 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String title;
-
+    @Column(nullable = false)
     private LocalTime duration;
-
+@Column(length = 99999999)
     private String description;
 
-    @Column(length = 999999999)
+    @Column(length = 999999999, nullable = false)
     private String posterImage;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Column(length = 3)
+    @Column(length = 3, nullable = false)
     private int ageLimit;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", orphanRemoval = true, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Show> showList;
 

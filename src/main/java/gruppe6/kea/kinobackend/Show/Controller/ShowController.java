@@ -35,7 +35,7 @@ public class ShowController {
 
     @PostMapping("")
     public ResponseEntity<Show> postNewShow(@RequestBody ShowCreationDTO show){
-return new ResponseEntity<>(showService.postNewShow(show),HttpStatus.CREATED);
+        return new ResponseEntity<>(showService.postNewShow(show),HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
