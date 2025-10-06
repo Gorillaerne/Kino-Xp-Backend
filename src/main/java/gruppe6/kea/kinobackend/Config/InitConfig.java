@@ -21,36 +21,42 @@ public class InitConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-User user1 = new User();
-user1.setAuthlevel(Authlevel.ADMIN);
-user1.setUsername("admin");
-user1.setPassword("123");
-userService.createNewUser(user1);
+        try {
+            User user1 = new User();
+            user1.setAuthlevel(Authlevel.ADMIN);
+            user1.setUsername("admin");
+            user1.setPassword("123");
+            userService.createNewUser(user1);
 
-        User user2 = new User();
-        user2.setAuthlevel(Authlevel.EMPLOYEE);
-        user2.setUsername("employee");
-        user2.setPassword("123");
-        userService.createNewUser(user2);
+            //Kan slettes når vi har lavet opret nye brugere panel
+            User user2 = new User();
+            user2.setAuthlevel(Authlevel.EMPLOYEE);
+            user2.setUsername("employee");
+            user2.setPassword("123");
+            userService.createNewUser(user2);
 
 
-        User user3 = new User();
-        user3.setAuthlevel(Authlevel.EMPLOYEE);
-        user3.setUsername("longline");
-        user3.setPassword("123");
-        userService.createNewUser(user3);
+            User user3 = new User();
+            user3.setAuthlevel(Authlevel.EMPLOYEE);
+            user3.setUsername("longline");
+            user3.setPassword("123");
+            userService.createNewUser(user3);
 
-        User user4 = new User();
-        user4.setAuthlevel(Authlevel.EMPLOYEE);
-        user4.setUsername("gustavo");
-        user4.setPassword("123");
-        userService.createNewUser(user4);
+            User user4 = new User();
+            user4.setAuthlevel(Authlevel.EMPLOYEE);
+            user4.setUsername("gustavo");
+            user4.setPassword("123");
+            userService.createNewUser(user4);
 
-        User user5 = new User();
-        user5.setAuthlevel(Authlevel.EMPLOYEE);
-        user5.setUsername("jones");
-        user5.setPassword("123");
-        userService.createNewUser(user5);
+            User user5 = new User();
+            user5.setAuthlevel(Authlevel.EMPLOYEE);
+            user5.setUsername("jones");
+            user5.setPassword("123");
+            userService.createNewUser(user5);
+        } catch (Exception e) {
+            System.out.println("Admin bruger findes allerede");
+        }
+
 
 
 
