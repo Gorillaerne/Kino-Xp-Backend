@@ -13,5 +13,6 @@ public interface IBookedSeatsRepository extends JpaRepository<BookedSeats, Integ
 
     boolean existsByShowAndSeat(Show show, Seat seat);
 
-    List<BookedSeats> findByShow(Show show);
+    List<BookedSeats> findAllByShow(Show show);
+
 }
