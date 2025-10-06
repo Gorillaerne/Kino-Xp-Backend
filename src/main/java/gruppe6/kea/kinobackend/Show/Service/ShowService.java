@@ -29,12 +29,5 @@ public class ShowService {
         return iShowRepository.findAll();
     }
 
-    public Show addShow(Show show) {
-        return iShowRepository.save(show);
-    }
-
-    public List<Show> getAllShows() {
-        return iShowRepository.findAll();
-    }
 
 }

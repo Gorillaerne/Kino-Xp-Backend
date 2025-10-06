@@ -37,7 +37,4 @@ public class ShowController {
         System.out.println("Fetching all shows");
         return showService.getAllShows();
     }
-
-
-
 }
