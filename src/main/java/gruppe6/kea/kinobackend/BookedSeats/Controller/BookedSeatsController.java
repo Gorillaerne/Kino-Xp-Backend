@@ -1,6 +1,7 @@
 package gruppe6.kea.kinobackend.BookedSeats.Controller;
 
 import gruppe6.kea.kinobackend.BookedSeats.Service.BookedSeatsService;
+import gruppe6.kea.kinobackend.DTO.BookedSeatDTO;
 import gruppe6.kea.kinobackend.Models.BookedSeats;
 import gruppe6.kea.kinobackend.Models.Seat;
 import gruppe6.kea.kinobackend.Models.Show;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/bookedseats")
 public class BookedSeatsController {
 
@@ -29,9 +31,9 @@ public class BookedSeatsController {
 
     // Hent alle BookedSeats for et show
     @GetMapping("/{showId}")
-    public ResponseEntity<List<BookedSeats>> getBookedSeats(@PathVariable int showId) {
-            Show show = showService.getShowById(showId); // exception hvis ikke fundet
-            List<BookedSeats> bookedSeats = bookedSeatsService.getBookedSeatsForShow(show);
+    public ResponseEntity<List<BookedSeatDTO>> getBookedSeatsByShow(@PathVariable int showId) {
+             // exception hvis ikke fundet
+            List<BookedSeatDTO> bookedSeats = bookedSeatsService.getBookedSeatsForShow(showId);
             return ResponseEntity.ok(bookedSeats); // 200 ok
     }
 

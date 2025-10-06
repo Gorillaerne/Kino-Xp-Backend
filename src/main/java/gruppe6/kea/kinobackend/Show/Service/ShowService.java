@@ -1,27 +1,33 @@
 package gruppe6.kea.kinobackend.Show.Service;
 
+import gruppe6.kea.kinobackend.Cinema.Repository.ICinemaRepository;
 import gruppe6.kea.kinobackend.DTO.ShowCreationDTO;
+import gruppe6.kea.kinobackend.Models.Cinema;
 import gruppe6.kea.kinobackend.Models.Show;
+import gruppe6.kea.kinobackend.Models.Theatre;
 import gruppe6.kea.kinobackend.Movie.Repository.IMovieRepository;
 import gruppe6.kea.kinobackend.Show.Repository.IShowRepository;
 import gruppe6.kea.kinobackend.Theatre.Repository.TheatreRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ShowService {
 private final IMovieRepository iMovieRepository;
     private final IShowRepository iShowRepository;
     private final TheatreRepository theatreRepository;
+    private final ICinemaRepository cinemaRepository;
 
-    public ShowService(IMovieRepository iMovieRepository, IShowRepository iShowRepository, TheatreRepository theatreRepository) {
+    public ShowService(IMovieRepository iMovieRepository, IShowRepository iShowRepository, TheatreRepository theatreRepository, ICinemaRepository cinemaRepository) {
         this.iMovieRepository = iMovieRepository;
         this.iShowRepository = iShowRepository;
         this.theatreRepository = theatreRepository;
+        this.cinemaRepository = cinemaRepository;
     }
 
     public Show getShowById(int id) {
@@ -50,5 +56,22 @@ private final IMovieRepository iMovieRepository;
             return true;
         }
 
+    }
+
+    public Set<Show> getAllShowsInCinemaOnSpecificDay(int cinemaId, int movieId, LocalDate date) {
+        Set<Show> showsToReturn = new HashSet<>();
+        Cinema foundCinema = cinemaRepository.findById(cinemaId).orElseThrow(() -> new EntityNotFoundException("Cinema not found"));
+        List<Show> showList = iShowRepository.findAll();
+        for (Show show : showList){
+            if (show.getShowTime().toLocalDate().isEqual(date) && show.getMovie().getId() == movieId){
+              for (Theatre theatre : foundCinema.getTheatreList()){
+                  if (theatre.getId() == show.getTheatre().getId()){
+                      showsToReturn.add(show);
+                  }
+              }
+
+            }
+        }
+return showsToReturn;
     }
 }

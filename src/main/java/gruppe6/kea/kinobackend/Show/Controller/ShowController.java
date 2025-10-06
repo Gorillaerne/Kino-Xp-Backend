@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -31,6 +33,11 @@ public class ShowController {
     public ResponseEntity<Show> getShowById(@PathVariable int id){
         Show show = showService.getShowById(id);
         return ResponseEntity.ok(show);
+    }
+
+    @GetMapping("/{cinemaId}/{movieId}/{date}")
+    public ResponseEntity<Set<Show>> getAllShowsInCinemaOnSpecificDay(@PathVariable int cinemaId,@PathVariable int movieId ,@PathVariable LocalDate date){
+        return new ResponseEntity<>(showService.getAllShowsInCinemaOnSpecificDay(cinemaId, movieId,date),HttpStatus.OK);
     }
 
     @PostMapping("")
