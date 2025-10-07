@@ -37,7 +37,6 @@ public class MovieController {
     }
 
 
-
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<Movie> getMovies(){

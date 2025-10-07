@@ -1,4 +1,8 @@
 package gruppe6.kea.kinobackend.Ticket.Repository;
 
-public interface ITicketRepository {
+import gruppe6.kea.kinobackend.Models.Seat;
+import gruppe6.kea.kinobackend.Models.Ticket;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ITicketRepository extends JpaRepository<Ticket, Integer> {
 }

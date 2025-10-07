@@ -4,6 +4,8 @@ package gruppe6.kea.kinobackend.User.Service;
 import gruppe6.kea.kinobackend.DTO.LoginRequestDTO;
 import gruppe6.kea.kinobackend.DTO.LoginResponseDTO;
 import gruppe6.kea.kinobackend.Models.User;
+import gruppe6.kea.kinobackend.Movie.Repository.IMovieRepository;
+import gruppe6.kea.kinobackend.Movie.Service.MovieService;
 import gruppe6.kea.kinobackend.User.Repository.IUserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,10 +20,14 @@ public class UserService {
 
     private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MovieService movieService;
+    private final IMovieRepository iMovieRepository;
 
-    public UserService(IUserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(IUserRepository userRepository, PasswordEncoder passwordEncoder, MovieService movieService, IMovieRepository iMovieRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.movieService = movieService;
+        this.iMovieRepository = iMovieRepository;
     }
 
     public boolean checkPassword(String rawPassword, String hashedPassword) {
@@ -54,4 +60,10 @@ public class UserService {
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
+
+    public void deleteUser(int id){
+        userRepository.deleteById(id);
+    }
+
+
 }

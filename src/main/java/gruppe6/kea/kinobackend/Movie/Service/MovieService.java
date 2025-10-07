@@ -72,8 +72,6 @@ public class MovieService {
         }
 
 
-
-
         return movieSet;
     }
 
