@@ -38,8 +38,11 @@ public class UserController {
         return new ResponseEntity<>(userService.createNewUser(user),HttpStatus.CREATED);
     }
 
-
-
+    @DeleteMapping("/{userID}")
+    public ResponseEntity<Void> deleteUser(@PathVariable int userID){
+        userService.deleteUser(userID);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }
