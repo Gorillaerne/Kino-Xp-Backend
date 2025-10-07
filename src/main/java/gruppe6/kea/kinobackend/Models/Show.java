@@ -22,12 +22,12 @@ public class Show {
 
 
     @ManyToOne
-    @JoinColumn(name = "theatre_id")
+    @JoinColumn(name = "theatre_id", nullable = false)
     @JsonManagedReference("theatre-show")
     private Theatre theatre;
 
    @ManyToOne
-   @JoinColumn(name = "movie_id")
+   @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
