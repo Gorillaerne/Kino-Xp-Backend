@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -53,6 +55,10 @@ public class UserService {
 
     public User findById(int id) {
         return userRepository.findById(id).orElseThrow(() -> new BadCredentialsException("User with id: " + id + " doesnt exist"));
+    }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 
     public void deleteUser(int id){
