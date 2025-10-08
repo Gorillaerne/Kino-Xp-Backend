@@ -56,20 +56,5 @@ public class InitConfig implements CommandLineRunner {
         } catch (Exception e) {
             System.out.println("Admin bruger findes allerede");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

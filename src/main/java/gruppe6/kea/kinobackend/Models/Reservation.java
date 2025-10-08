@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,9 @@ public class Reservation {
     @Column(nullable = false)
     private LocalDateTime timeOfPurchase;
 
+    @Column(nullable = false)
+    private String name;
+
 
     @Column(nullable = true)
     private int phoneNumber;
@@ -27,7 +31,7 @@ public class Reservation {
 
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("reservation-ticket") // bidirektionelle relationer, jackson ender i et uendeligt loop når den prøver at lave JSON.
-    private List<Ticket> ticketList;
+    private List<Ticket> ticketList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "show_id")
@@ -83,5 +87,13 @@ public class Reservation {
 
     public void setTimeOfPurchase(LocalDateTime timeOfPurchase) {
         this.timeOfPurchase = timeOfPurchase;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,6 +1,7 @@
 package gruppe6.kea.kinobackend.Cinema.Controller;
 
 import gruppe6.kea.kinobackend.Cinema.Service.CinemaService;
+import gruppe6.kea.kinobackend.DTO.CinemaRequestDTO;
 import gruppe6.kea.kinobackend.Models.Cinema;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,15 @@ public class CinemaController {
         cinemaService.deleteCinemaById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/name")
+    public ResponseEntity<Cinema> createCinemaFromName(@RequestBody CinemaRequestDTO request) {
+        Cinema newCinema = new Cinema(request.getName());
+        Cinema saved = cinemaService.createCinema(newCinema);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+
 
 
 }
