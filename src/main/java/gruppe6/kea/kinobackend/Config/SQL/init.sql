@@ -2,23 +2,23 @@
 -- CINEMAS
 -- ========================
 INSERT INTO cinema (id, name) VALUES
-                                  (1, 'Copenhagen Cinema'),
-                                  (2, 'Aarhus Cinema'),
-                                  (3, 'Odense Cinema');
+                                  (1, 'Københaven Imperial'),
+                                  (2, 'Aarhus Havne-bio'),
+                                  (3, 'Odense Film');
 
 -- Cinema - Users mapping
 INSERT INTO cinema_user (cinema_id, user_id) VALUES
-                                                 (1, 1), (1, 2), (2, 3), (3, 4), (3, 5);
+                                                 (1, 1), (1, 2), (2, 3), (3, 4), (3, 5),(2, 1),(3, 1);
 
 -- ========================
 -- THEATRES
 -- ========================
 INSERT INTO theatre (id, name, cinema_id) VALUES
-                                              (1, 'Copenhagen Hall 1', 1),
-                                              (2, 'Copenhagen Hall 2', 1),
-                                              (3, 'Aarhus Hall A', 2),
-                                              (4, 'Aarhus Hall B', 2),
-                                              (5, 'Odense Big Screen', 3);
+                                              (1, 'Sal 1', 1),
+                                              (2, 'Sal 2', 1),
+                                              (3, 'Sal 1', 2),
+                                              (4, 'Sal 2', 2),
+                                              (5, 'Odense storskærm', 3);
 
 -- ========================
 -- SEATS (Copenhagen Cinema)
@@ -105,13 +105,14 @@ INSERT INTO movie (id, title, duration, description, poster_image, category, age
 -- SHOWS
 -- ========================
 INSERT INTO shows (id, show_time, theatre_id, movie_id) VALUES
-                                                            (1, '2025-10-07 19:30:00', 1, 1),
-                                                            (2, '2025-10-08 15:00:00', 1, 2),
-                                                            (3, '2025-10-09 20:00:00', 2, 3),
-                                                            (4, '2025-10-10 18:00:00', 3, 4),
-                                                            (5, '2025-10-7 14:00:00', 5, 5),
-                                                            (6, '2025-10-8 21:00:00', 1, 3),
-                                                            (7, '2025-10-9 16:00:00', 2, 4);
+                                                            (1, '2025-10-13 19:30:00', 1, 1),
+                                                            (2, '2025-10-14 15:00:00', 1, 2),
+                                                            (3, '2025-10-15 20:00:00', 2, 3),
+                                                            (4, '2025-10-16 18:00:00', 3, 4),
+                                                            (5, '2025-10-17 14:00:00', 5, 5),
+                                                            (6, '2025-10-18 21:00:00', 1, 3),
+                                                            (7, '2025-10-19 16:00:00', 2, 4);
+
 
 -- ========================
 -- RESERVATIONS
