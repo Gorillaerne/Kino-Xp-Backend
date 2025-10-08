@@ -3,6 +3,7 @@ package gruppe6.kea.kinobackend.Reservation.Controller;
 import gruppe6.kea.kinobackend.DTO.ReservationDTO;
 import gruppe6.kea.kinobackend.Models.Reservation;
 import gruppe6.kea.kinobackend.Reservation.Service.ReservationService;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +28,15 @@ public class ReservationController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Reservation> createReservations(@RequestBody ReservationDTO dto) {
-        Reservation savedReservation = reservationService.createReservation(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedReservation);
+    public ResponseEntity<?> createReservations(@RequestBody ReservationDTO dto) {
+        try {
+            Reservation savedReservation = reservationService.createReservation(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedReservation);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+
+
     }
 
     @DeleteMapping("/{id}")
