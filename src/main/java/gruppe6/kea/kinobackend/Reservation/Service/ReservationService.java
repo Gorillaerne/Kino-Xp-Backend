@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class ReservationService {
@@ -33,7 +35,18 @@ public class ReservationService {
     }
 
     @Transactional
-    public Reservation createReservation(ReservationDTO dto) {
+    public Reservation createReservation(ReservationDTO dto) throws Exception {
+
+        List<BookedSeats> bookedSeatsFromShow = iBookedSeatsRepository.findAllByShow(iShowRepository.findById(dto.getShowId())
+                        .orElseThrow(() -> new EntityNotFoundException("Show not found")));
+
+        for (BookedSeats bookedSeats : bookedSeatsFromShow) {
+            for (Integer seatId : dto.getSeatIds()) {
+                if (bookedSeats.getSeat().getId() == seatId) {
+                    throw new Exception("Nogle af sæderne er booket");
+                }
+            }
+        }
 
         // 1 Opretter Reservation entity
 
