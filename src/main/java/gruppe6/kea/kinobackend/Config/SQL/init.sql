@@ -14,10 +14,10 @@ INSERT INTO cinema_user (cinema_id, user_id) VALUES
 -- THEATRES
 -- ========================
 INSERT INTO theatre (id, name, cinema_id) VALUES
-                                              (1, 'Sal 1', 1),
-                                              (2, 'Sal 2', 1),
-                                              (3, 'Sal 1', 2),
-                                              (4, 'Sal 2', 2),
+                                              (1, 'Imperial Sal 1', 1),
+                                              (2, 'Imperial Sal 2', 1),
+                                              (3, 'Havne-bio Sal 1', 2),
+                                              (4, 'Havne-bio Sal 2', 2),
                                               (5, 'Odense storskærm', 3);
 
 -- ========================
