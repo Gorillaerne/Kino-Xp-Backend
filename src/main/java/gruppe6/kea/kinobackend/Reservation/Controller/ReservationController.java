@@ -1,5 +1,6 @@
 package gruppe6.kea.kinobackend.Reservation.Controller;
 
+import gruppe6.kea.kinobackend.DTO.ReservationDTO;
 import gruppe6.kea.kinobackend.Models.Reservation;
 import gruppe6.kea.kinobackend.Reservation.Service.ReservationService;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,8 @@ public class ReservationController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Reservation> createReservations(@RequestBody Reservation reservation) {
-        Reservation savedReservation = reservationService.createReservation(reservation);
+    public ResponseEntity<Reservation> createReservations(@RequestBody ReservationDTO dto) {
+        Reservation savedReservation = reservationService.createReservation(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedReservation);
     }
 
