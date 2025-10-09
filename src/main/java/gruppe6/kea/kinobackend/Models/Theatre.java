@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,12 +25,12 @@ public class Theatre {
 
     @OneToMany(mappedBy = "theatre")
     @JsonBackReference("theatre-show")
-    private List<Show> showList;
+    private List<Show> showList = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "theatre")
     @JsonManagedReference("theatre-seat")
-    private List<Seat> seatList;
+    private List<Seat> seatList = new ArrayList<>();
 
     public Theatre() {
     }

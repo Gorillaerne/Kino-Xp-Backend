@@ -19,7 +19,7 @@ public class Seat {
     private int seatNumber;
 
     @ManyToOne
-    @JoinColumn(name = "theatre_id")
+    @JoinColumn(name = "theatre_id",nullable = false)
     @JsonBackReference("theatre-seat")
     private Theatre theatre;
 
