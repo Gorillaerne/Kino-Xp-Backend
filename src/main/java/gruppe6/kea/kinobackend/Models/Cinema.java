@@ -18,7 +18,10 @@ public class Cinema {
     private String name;
 
   @ManyToMany
-  @JoinTable(name = "cinema_user",joinColumns = @JoinColumn(name = "cinema_id"),inverseJoinColumns = @JoinColumn(name = "user_id"))
+  @JoinTable(name = "cinema_user",
+          joinColumns = @JoinColumn(name = "cinema_id"),
+          inverseJoinColumns = @JoinColumn(name = "user_id")
+  )
   @JsonBackReference("cinema-user")
    private List<User> userList;
 

@@ -57,6 +57,11 @@ public class UserController {
                 .map(cinemaService::findById)
                 .collect(Collectors.toList());
 
+        // Add user to each cinema's userList (owning side)
+        for (Cinema cinema : cinemas) {
+            cinema.getUserList().add(user);
+        }
+
         user.setCinemas(cinemas);
 
         User savedUser = userService.createNewUser(user);
@@ -66,7 +71,7 @@ public class UserController {
     @DeleteMapping("/{userID}")
     public ResponseEntity<Void> deleteUser(@PathVariable int userID){
         userService.deleteUser(userID);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
