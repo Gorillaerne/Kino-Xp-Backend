@@ -61,6 +61,12 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable int id, @RequestBody Movie updatedMovie) {
+         movieService.updateMovie(id, updatedMovie);
+         return ResponseEntity.ok(updatedMovie);
+    }
+
 
 
 

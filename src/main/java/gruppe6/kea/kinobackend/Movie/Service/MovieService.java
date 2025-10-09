@@ -70,8 +70,6 @@ public class MovieService {
             }
 
         }
-
-
         return movieSet;
     }
 
@@ -87,5 +85,18 @@ public class MovieService {
         return activeMovies;
     }
 
+    public void updateMovie(int id, Movie updatedMovie) {
+        Movie existingMovie = iMovieRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Movie not found with id: " + id));
+
+        existingMovie.setTitle(updatedMovie.getTitle());
+        existingMovie.setDuration(updatedMovie.getDuration());
+        existingMovie.setDescription(updatedMovie.getDescription());
+        existingMovie.setPosterImage(updatedMovie.getPosterImage());
+        existingMovie.setCategory(updatedMovie.getCategory());
+        existingMovie.setAgeLimit(updatedMovie.getAgeLimit());
+
+        iMovieRepository.save(existingMovie);
+    }
 }
 

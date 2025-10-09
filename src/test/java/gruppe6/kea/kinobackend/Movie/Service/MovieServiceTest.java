@@ -29,7 +29,7 @@ class MovieServiceTest {
     // Inject a mock ApplicationContext
     @Mock
     private ApplicationContext context;
- 
+
     @Mock
     private IMovieRepository iMovieRepository;
 
@@ -83,4 +83,22 @@ void deleteMovie () {
 
         verify(iMovieRepository).save(movie);
     }
+
+    @Test
+    void updateMovie(){
+        Movie updatedMovie = new Movie(
+                "updatedTest",
+                LocalTime.of(1, 45), // 1 time og 45 minutter
+                "updated description",
+                "https://example.com/updated_inception.jpg",
+                Category.DRAMA,
+                15,
+                shows
+        );
+
+        movieService.createMovie(updatedMovie);
+
+        verify(iMovieRepository).save(updatedMovie);
+    }
+
 }
