@@ -28,8 +28,13 @@ public class ReservationController {
 
     @PostMapping("")
     public ResponseEntity<Reservation> createReservations(@RequestBody ReservationDTO dto) {
-        Reservation savedReservation = reservationService.createReservation(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedReservation);
+        try {
+            Reservation savedReservation = reservationService.createReservation(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedReservation);
+        }catch (Exception e){
+            throw new RuntimeException("DET VIRKER IK");
+        }
+
     }
 
     @DeleteMapping("/{id}")
