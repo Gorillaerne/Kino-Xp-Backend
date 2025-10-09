@@ -22,12 +22,12 @@ public class Theatre {
     @JsonBackReference("cinema-theatre")
     private Cinema cinema;
 
-    @OneToMany(mappedBy = "theatre",orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "theatre")
     @JsonBackReference("theatre-show")
     private List<Show> showList;
 
 
-    @OneToMany(mappedBy = "theatre",orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "theatre")
     @JsonManagedReference("theatre-seat")
     private List<Seat> seatList;
 

@@ -24,7 +24,7 @@ public class Seat {
     private Theatre theatre;
 
 
-    @OneToMany(mappedBy = "seat",orphanRemoval = true,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "seat")
     @JsonManagedReference("seat_bookedseats")
     private List<BookedSeats> bookedSeats;
 
