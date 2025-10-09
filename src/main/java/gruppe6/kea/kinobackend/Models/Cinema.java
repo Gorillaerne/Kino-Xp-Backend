@@ -22,7 +22,7 @@ public class Cinema {
   @JsonBackReference("cinema-user")
    private List<User> userList;
 
- @OneToMany(mappedBy = "cinema")
+ @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL, orphanRemoval = true)
  @JsonManagedReference("cinema-theatre")
   private List<Theatre> theatreList;
 

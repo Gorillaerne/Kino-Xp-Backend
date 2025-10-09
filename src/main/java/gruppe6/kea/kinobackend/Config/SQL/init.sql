@@ -116,10 +116,10 @@ INSERT INTO shows (id, show_time, theatre_id, movie_id) VALUES
 -- ========================
 -- RESERVATIONS
 -- ========================
-INSERT INTO reservation (id, time_of_purchase, phone_number, email, show_id) VALUES
-                                                                                 (1, '2025-10-01 10:00:00', 12345678, 'customer1@example.com', 1),
-                                                                                 (2, '2025-10-01 11:30:00', 87654321, 'customer2@example.com', 2),
-                                                                                 (3, '2025-10-01 12:00:00', 99887766, 'fanbat@example.com', 3);
+INSERT INTO reservation (id, time_of_purchase, phone_number, email, show_id,name) VALUES
+                                                                                      (1, '2025-10-01 10:00:00', 12345678, 'customer1@example.com', 1,'Børge'),
+                                                                                      (2, '2025-10-01 11:30:00', 87654321, 'customer2@example.com', 2,'Svend'),
+                                                                                      (3, '2025-10-01 12:00:00', 99887766, 'fanbat@example.com', 3,'Jonsd');
 
 -- ========================
 -- TICKETS
