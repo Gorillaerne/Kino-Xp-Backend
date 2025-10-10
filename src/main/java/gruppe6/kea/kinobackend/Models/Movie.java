@@ -1,12 +1,9 @@
 package gruppe6.kea.kinobackend.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gruppe6.kea.kinobackend.Models.Enums.Category;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class Movie {
     private String title;
     @Column(nullable = false)
     private LocalTime duration;
-@Column(length = 99999999)
+    @Column(length = 99999999)
     private String description;
 
     @Column(length = 999999999, nullable = false)

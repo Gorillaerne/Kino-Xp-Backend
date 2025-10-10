@@ -7,17 +7,13 @@ import gruppe6.kea.kinobackend.Models.*;
 import gruppe6.kea.kinobackend.Reservation.Repository.IReservationRepository;
 import gruppe6.kea.kinobackend.Show.Repository.IShowRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.proxy.EntityNotFoundDelegate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -25,13 +21,11 @@ public class ReservationService {
     private final IReservationRepository iReservationRepository;
     private final IBookedSeatsRepository iBookedSeatsRepository;
     private final IShowRepository iShowRepository;
-    private final EmailService emailService;
 
-    public ReservationService(IReservationRepository iReservationRepository, IBookedSeatsRepository iBookedSeatsRepository, IShowRepository iShowRepository, EmailService emailService) {
+    public ReservationService(IReservationRepository iReservationRepository, IBookedSeatsRepository iBookedSeatsRepository, IShowRepository iShowRepository) {
         this.iReservationRepository = iReservationRepository;
         this.iBookedSeatsRepository = iBookedSeatsRepository;
         this.iShowRepository = iShowRepository;
-        this.emailService = emailService;
     }
 
     public Reservation findById(int id) {
@@ -56,6 +50,7 @@ public class ReservationService {
             }
         }
 
+        System.out.println("step 1 færdog");
         // 1. Opret Reservation entity
         Reservation reservation = new Reservation();
         reservation.setName(dto.getName());
@@ -63,11 +58,12 @@ public class ReservationService {
         reservation.setPhoneNumber(dto.getPhoneNumber());
         reservation.setTimeOfPurchase(LocalDateTime.now());
 
+        System.out.println("step 2 færdog");
         // 2. Hent show fra DB
         Show show = iShowRepository.findById(dto.getShowId())
                 .orElseThrow(() -> new EntityNotFoundException("Show Not Found!"));
         reservation.setShow(show);
-
+        System.out.println("step 3 færdog");
         // 3. Opret Tickets og BookedSeats
         if (dto.getSeatIds() != null) {
             for (int seatId : dto.getSeatIds()) {
@@ -92,51 +88,30 @@ public class ReservationService {
                 reservation.getTicketList().add(ticket);
             }
         }
-
+        System.out.println("step 4 færdog");
         // 4. Gem reservation
         Reservation savedReservation = iReservationRepository.save(reservation);
-
+        System.out.println("step 5 færdog");
         // 5. Gem BookedSeats
         for (Ticket ticket : savedReservation.getTicketList()) {
             iBookedSeatsRepository.save(ticket.getBookedSeat());
         }
 
 
-        //EMAIL FIS
-        List<byte[]> pdfBytesList = new ArrayList<>();
-        // 6. Generer TicketDTO med Seat-objekter
-        for (Ticket ticket : savedReservation.getTicketList()) {
-            // Generer TicketDTO med ét sæde
-            TicketDTO ticketDTO = new TicketDTO();
-            ticketDTO.setName(savedReservation.getName());
-            ticketDTO.setEmail(savedReservation.getEmail());
-            ticketDTO.setMovieTitle(savedReservation.getShow().getMovie().getTitle());
-            ticketDTO.setShowTime(savedReservation.getShow().getShowTime());
-            ticketDTO.setTheatreName(savedReservation.getShow().getTheatre().getName());
-            ticketDTO.setCinemaName(savedReservation.getShow().getTheatre().getCinema().getName());
-            ticketDTO.setSeats(ticket.getBookedSeat().getSeat());
-
-
-            // 7. Generer PDF som byte-array og send mail
-            byte[] pdfBytes = emailService.generateTicketPdfBytes(ticketDTO);
-pdfBytesList.add(pdfBytes);
-
-
-
-
-        }
-        emailService.sendTicketMail(savedReservation.getEmail(), pdfBytesList);
+        System.out.println("Færdig");
         return savedReservation;
     }
 
 
-        @Transactional
-        public void deleteReservationById (int id){
-            Reservation reservation = iReservationRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Reservation not found"));
+    @Transactional
+    public void deleteReservationById(int id) {
+        Reservation reservation = iReservationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation not found"));
 
-            iReservationRepository.delete(reservation);
-        }
-
+        iReservationRepository.delete(reservation);
     }
+
+
+
+}
 

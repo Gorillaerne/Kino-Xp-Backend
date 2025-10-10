@@ -24,30 +24,30 @@ public class ShowController {
 
 
     @GetMapping("")
-    public ResponseEntity<List<Show>> getAllShow(){
-        return new ResponseEntity<>(showService.findAll(),HttpStatus.OK) ;
+    public ResponseEntity<List<Show>> getAllShow() {
+        return new ResponseEntity<>(showService.findAll(), HttpStatus.OK);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Show> getShowById(@PathVariable int id){
+    public ResponseEntity<Show> getShowById(@PathVariable int id) {
         Show show = showService.getShowById(id);
         return ResponseEntity.ok(show);
     }
 
     @GetMapping("/{cinemaId}/{movieId}/{date}")
-    public ResponseEntity<Set<Show>> getAllShowsInCinemaOnSpecificDay(@PathVariable int cinemaId,@PathVariable int movieId ,@PathVariable LocalDate date){
-        return new ResponseEntity<>(showService.getAllShowsInCinemaOnSpecificDay(cinemaId, movieId,date),HttpStatus.OK);
+    public ResponseEntity<Set<Show>> getAllShowsInCinemaOnSpecificDay(@PathVariable int cinemaId, @PathVariable int movieId, @PathVariable LocalDate date) {
+        return new ResponseEntity<>(showService.getAllShowsInCinemaOnSpecificDay(cinemaId, movieId, date), HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<Show> postNewShow(@RequestBody ShowCreationDTO show){
-        return new ResponseEntity<>(showService.postNewShow(show),HttpStatus.CREATED);
+    public ResponseEntity<Show> postNewShow(@RequestBody ShowCreationDTO show) {
+        return new ResponseEntity<>(showService.postNewShow(show), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteShowFromId(@PathVariable int id){
-        return new ResponseEntity<>(showService.deleteShowFromId(id),HttpStatus.OK);
+    public ResponseEntity<Boolean> deleteShowFromId(@PathVariable int id) {
+        return new ResponseEntity<>(showService.deleteShowFromId(id), HttpStatus.OK);
     }
 
 }

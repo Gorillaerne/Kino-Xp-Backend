@@ -9,9 +9,9 @@ public class TheatreMangeDTO {
 
     private String name;
 
- private String cinemaName;
+    private String cinemaName;
 
- private int cinemaId;
+    private int cinemaId;
 
     public TheatreMangeDTO() {
     }

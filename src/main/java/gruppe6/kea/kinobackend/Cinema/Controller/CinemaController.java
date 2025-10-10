@@ -23,14 +23,14 @@ public class CinemaController {
 
 
     @GetMapping("")
-    public ResponseEntity<List<Cinema>> getAllCinemas(){
-        return new ResponseEntity<>(cinemaService.findAll(),HttpStatus.OK);
+    public ResponseEntity<List<Cinema>> getAllCinemas() {
+        return new ResponseEntity<>(cinemaService.findAll(), HttpStatus.OK);
     }
 
 
     @GetMapping("/displaying/{movieId}")
-    public ResponseEntity<Set<Cinema>> getAllCinemasDisplaySpecificMovie(@PathVariable int movieId){
-        return new ResponseEntity<>(cinemaService.getAllCinemasDisplaySpecificMovie(movieId),HttpStatus.OK);
+    public ResponseEntity<Set<Cinema>> getAllCinemasDisplaySpecificMovie(@PathVariable int movieId) {
+        return new ResponseEntity<>(cinemaService.getAllCinemasDisplaySpecificMovie(movieId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -58,8 +58,6 @@ public class CinemaController {
         Cinema saved = cinemaService.createCinema(newCinema);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
-
-
 
 
 }
