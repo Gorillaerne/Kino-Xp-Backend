@@ -49,7 +49,7 @@ public class CinemaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCinema(@PathVariable int id) {
         cinemaService.deleteCinemaById(id);
-        return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/name")
