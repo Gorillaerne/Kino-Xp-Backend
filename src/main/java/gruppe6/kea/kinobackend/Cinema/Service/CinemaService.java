@@ -41,7 +41,7 @@ public class CinemaService {
     }
 
     public List<Cinema> findAll() {
-      return iCinemaRepository.findAll();
+        return iCinemaRepository.findAll();
     }
 
     public Set<Cinema> getAllCinemasDisplaySpecificMovie(int movieId) {
@@ -49,12 +49,12 @@ public class CinemaService {
 
         Set<Cinema> cinemasDisplayingMovie = new HashSet<>();
 
-        for (Show show : foundMovie.getShowList()){
-            if (show.getShowTime().isAfter(LocalDateTime.now())){
+        for (Show show : foundMovie.getShowList()) {
+            if (show.getShowTime().isAfter(LocalDateTime.now())) {
                 cinemasDisplayingMovie.add(show.getTheatre().getCinema());
             }
         }
 
-return cinemasDisplayingMovie;
+        return cinemasDisplayingMovie;
     }
 }

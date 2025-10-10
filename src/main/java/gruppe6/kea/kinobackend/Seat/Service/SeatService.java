@@ -6,8 +6,6 @@ import gruppe6.kea.kinobackend.Seat.Repository.ISeatRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class SeatService {
 

@@ -1,7 +1,6 @@
 package gruppe6.kea.kinobackend.Models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -26,16 +25,16 @@ public class Show {
     @JsonManagedReference("theatre-show")
     private Theatre theatre;
 
-   @ManyToOne
-   @JoinColumn(name = "movie_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 
-   @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
-   @JsonManagedReference("show-bookedseats")
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("show-bookedseats")
     private List<BookedSeats> bookedSeats;
 
-   @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
-   @JsonManagedReference("show-reservation")
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("show-reservation")
     private List<Reservation> reservations;
 
     public Show() {

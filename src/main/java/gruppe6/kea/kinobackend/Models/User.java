@@ -1,6 +1,5 @@
 package gruppe6.kea.kinobackend.Models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gruppe6.kea.kinobackend.Models.Enums.Authlevel;
@@ -16,15 +15,15 @@ public class User {
     private int id;
 
     @Column(unique = true)
-private String username;
+    private String username;
 
     @JsonIgnore
     private String password;
     @Enumerated(EnumType.STRING)
     private Authlevel authlevel;
 
-   @ManyToMany(mappedBy = "userList")
-   @JsonManagedReference("cinema-user")
+    @ManyToMany(mappedBy = "userList")
+    @JsonManagedReference("cinema-user")
     private List<Cinema> cinemas;
 
     public User() {
