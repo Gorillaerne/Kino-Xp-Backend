@@ -24,7 +24,7 @@ public class Seat {
     private Theatre theatre;
 
 
-    @OneToMany(mappedBy = "seat")
+    @OneToMany(mappedBy = "seat",orphanRemoval = true)
     @JsonManagedReference("seat_bookedseats")
     private List<BookedSeats> bookedSeats;
 
