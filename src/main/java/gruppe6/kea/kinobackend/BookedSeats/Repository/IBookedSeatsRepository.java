@@ -10,9 +10,6 @@ import java.util.List;
 
 @Repository
 public interface IBookedSeatsRepository extends JpaRepository<BookedSeats, Integer> {
-
     boolean existsByShowAndSeat(Show show, Seat seat);
-
     List<BookedSeats> findAllByShow(Show show);
-
 }

@@ -30,19 +30,19 @@ public class TheatreService {
     }
 
     public List<Theatre> getTheatres() {
-    return theatreRepository.findAll();
+        return theatreRepository.findAll();
     }
 
     public Theatre getTheatreById(int id) {
-        return theatreRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Theater not found"));
+        return theatreRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Theater not found"));
 
     }
 
 
     public List<TheatreMangeDTO> getTheatreManageDtos() {
-List<TheatreMangeDTO> listToReturn = new ArrayList<>();
+        List<TheatreMangeDTO> listToReturn = new ArrayList<>();
 
-        for(Theatre theatre : theatreRepository.findAll()){
+        for (Theatre theatre : theatreRepository.findAll()) {
             TheatreMangeDTO dtoToReturn = new TheatreMangeDTO();
 
             dtoToReturn.setId(theatre.getId());
@@ -50,12 +50,12 @@ List<TheatreMangeDTO> listToReturn = new ArrayList<>();
             dtoToReturn.setCinemaName(theatre.getCinema().getName());
             System.out.println(theatre.getCinema().getName());
 
-            Map<Integer,Integer> countMap = new HashMap<>();
-            for (Seat seat : theatre.getSeatList()){
-                if (!countMap.containsKey(seat.getRow())){
-                    countMap.put(seat.getRow(),1);
-                }else {
-                    countMap.put(seat.getRow(),countMap.get(seat.getRow())+1);
+            Map<Integer, Integer> countMap = new HashMap<>();
+            for (Seat seat : theatre.getSeatList()) {
+                if (!countMap.containsKey(seat.getRow())) {
+                    countMap.put(seat.getRow(), 1);
+                } else {
+                    countMap.put(seat.getRow(), countMap.get(seat.getRow()) + 1);
                 }
 
             }
@@ -99,10 +99,8 @@ List<TheatreMangeDTO> listToReturn = new ArrayList<>();
 
     public void deleteTheatre(int id) {
 
-            Theatre foundTheatre = theatreRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Theatre not found"));
-            theatreRepository.delete(foundTheatre);
-
-
+        Theatre foundTheatre = theatreRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Theatre not found"));
+        theatreRepository.delete(foundTheatre);
 
 
     }

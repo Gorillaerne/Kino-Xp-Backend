@@ -18,7 +18,7 @@ import java.util.Set;
 
 @Service
 public class ShowService {
-private final IMovieRepository iMovieRepository;
+    private final IMovieRepository iMovieRepository;
     private final IShowRepository iShowRepository;
     private final TheatreRepository theatreRepository;
     private final ICinemaRepository cinemaRepository;
@@ -37,8 +37,8 @@ private final IMovieRepository iMovieRepository;
     public Show postNewShow(ShowCreationDTO showDto) {
         Show show = new Show();
         show.setShowTime(showDto.getShowTime());
-        show.setMovie(iMovieRepository.findById(showDto.getMovie_id()).orElseThrow(()-> new EntityNotFoundException("Movie not found")));
-        show.setTheatre(theatreRepository.findById(showDto.getTheatre_id()).orElseThrow(()-> new EntityNotFoundException("Theatre not found")));
+        show.setMovie(iMovieRepository.findById(showDto.getMovie_id()).orElseThrow(() -> new EntityNotFoundException("Movie not found")));
+        show.setTheatre(theatreRepository.findById(showDto.getTheatre_id()).orElseThrow(() -> new EntityNotFoundException("Theatre not found")));
         return iShowRepository.save(show);
     }
 
@@ -50,9 +50,9 @@ private final IMovieRepository iMovieRepository;
         Show foundShow = iShowRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Show not found"));
 
         iShowRepository.delete(foundShow);
-        if (iShowRepository.findById(foundShow.getId()).isPresent()){
+        if (iShowRepository.findById(foundShow.getId()).isPresent()) {
             return false;
-        }else {
+        } else {
             return true;
         }
 
@@ -62,16 +62,16 @@ private final IMovieRepository iMovieRepository;
         Set<Show> showsToReturn = new HashSet<>();
         Cinema foundCinema = cinemaRepository.findById(cinemaId).orElseThrow(() -> new EntityNotFoundException("Cinema not found"));
         List<Show> showList = iShowRepository.findAll();
-        for (Show show : showList){
-            if (show.getShowTime().toLocalDate().isEqual(date) && show.getMovie().getId() == movieId){
-              for (Theatre theatre : foundCinema.getTheatreList()){
-                  if (theatre.getId() == show.getTheatre().getId()){
-                      showsToReturn.add(show);
-                  }
-              }
+        for (Show show : showList) {
+            if (show.getShowTime().toLocalDate().isEqual(date) && show.getMovie().getId() == movieId) {
+                for (Theatre theatre : foundCinema.getTheatreList()) {
+                    if (theatre.getId() == show.getTheatre().getId()) {
+                        showsToReturn.add(show);
+                    }
+                }
 
             }
         }
-return showsToReturn;
+        return showsToReturn;
     }
 }
