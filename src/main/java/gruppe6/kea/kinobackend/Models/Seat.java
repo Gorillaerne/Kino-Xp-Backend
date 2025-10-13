@@ -19,12 +19,12 @@ public class Seat {
     private int seatNumber;
 
     @ManyToOne
-    @JoinColumn(name = "theatre_id")
+    @JoinColumn(name = "theatre_id",nullable = false)
     @JsonBackReference("theatre-seat")
     private Theatre theatre;
 
 
-    @OneToMany(mappedBy = "seat")
+    @OneToMany(mappedBy = "seat",orphanRemoval = true)
     @JsonManagedReference("seat_bookedseats")
     private List<BookedSeats> bookedSeats;
 
@@ -69,5 +69,10 @@ public class Seat {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    @Override
+    public String toString() {
+        return "Sæde: " + seatNumber + " række: " + row;
     }
 }

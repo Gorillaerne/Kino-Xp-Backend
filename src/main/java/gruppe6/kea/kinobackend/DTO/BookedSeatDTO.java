@@ -4,8 +4,6 @@ import gruppe6.kea.kinobackend.Models.Seat;
 import gruppe6.kea.kinobackend.Models.Show;
 import gruppe6.kea.kinobackend.Models.Ticket;
 
-import java.util.List;
-
 public class BookedSeatDTO {
     int id;
     Seat seat;

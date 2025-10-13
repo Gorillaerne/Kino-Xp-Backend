@@ -1,12 +1,9 @@
 package gruppe6.kea.kinobackend.Config;
 
 import gruppe6.kea.kinobackend.Models.Enums.Authlevel;
-import gruppe6.kea.kinobackend.Models.Enums.Category;
 import gruppe6.kea.kinobackend.Models.User;
 import gruppe6.kea.kinobackend.User.Service.UserService;
-import jakarta.persistence.Column;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component

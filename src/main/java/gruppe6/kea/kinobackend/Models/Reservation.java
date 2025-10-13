@@ -30,12 +30,14 @@ public class Reservation {
     private String email;
 
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("reservation-ticket") // bidirektionelle relationer, jackson ender i et uendeligt loop når den prøver at lave JSON.
+    @JsonManagedReference("reservation-ticket")
+    // bidirektionelle relationer, jackson ender i et uendeligt loop når den prøver at lave JSON.
     private List<Ticket> ticketList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "show_id")
-    @JsonBackReference("show-reservation") // bidirektionelle relationer, jackson ender i et uendeligt loop når den prøver at lave JSON.
+    @JsonBackReference("show-reservation")
+    // bidirektionelle relationer, jackson ender i et uendeligt loop når den prøver at lave JSON.
     private Show show;
 
     public Reservation() {

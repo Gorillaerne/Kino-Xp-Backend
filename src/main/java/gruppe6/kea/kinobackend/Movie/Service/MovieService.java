@@ -24,47 +24,47 @@ public class MovieService {
     private final IMovieRepository iMovieRepository;
     private final IShowRepository showRepository;
 
-    public MovieService(ICinemaRepository cinemaRepository, IMovieRepository iMovieRepository, IShowRepository showRepository){
+    public MovieService(ICinemaRepository cinemaRepository, IMovieRepository iMovieRepository, IShowRepository showRepository) {
         this.cinemaRepository = cinemaRepository;
         this.iMovieRepository = iMovieRepository;
         this.showRepository = showRepository;
     }
 
-    public List<Movie> getAllMovies(){
+    public List<Movie> getAllMovies() {
         return iMovieRepository.findAll();
     }
 
-    public Optional<Movie> getMovieById(int id){
+    public Optional<Movie> getMovieById(int id) {
         return iMovieRepository.findById(id);
     }
 
-    public Movie createMovie(Movie movie){
+    public Movie createMovie(Movie movie) {
         return iMovieRepository.save(movie);
     }
 
-    public void deleteMovie(int id){
+    public void deleteMovie(int id) {
         iMovieRepository.deleteById(id);
     }
 
     public List<CategoryDTO> getCategories() {
         ArrayList<CategoryDTO> categories = new ArrayList<>();
 
-        for (Category cat : Category.values()){
-            categories.add(new CategoryDTO(cat.displayName,cat.toString()));
+        for (Category cat : Category.values()) {
+            categories.add(new CategoryDTO(cat.displayName, cat.toString()));
         }
         return categories;
     }
 
     public Set<Movie> getAllActiveMoviesFromCinemaID(int cinemaId) {
-        Cinema cinema = cinemaRepository.findById(cinemaId).orElseThrow(()->  new EntityNotFoundException("Cinema not found with id: " + cinemaId));
+        Cinema cinema = cinemaRepository.findById(cinemaId).orElseThrow(() -> new EntityNotFoundException("Cinema not found with id: " + cinemaId));
 
         Set<Movie> movieSet = new HashSet<>();
 
         List<Theatre> theatreList = cinema.getTheatreList();
 
-        for (Theatre theatre : theatreList){
-            for (Show show : theatre.getShowList()){
-                if (!show.getShowTime().isBefore(LocalDateTime.now())){
+        for (Theatre theatre : theatreList) {
+            for (Show show : theatre.getShowList()) {
+                if (!show.getShowTime().isBefore(LocalDateTime.now())) {
                     movieSet.add(show.getMovie());
                 }
             }
@@ -79,12 +79,13 @@ public class MovieService {
         List<Show> showList = showRepository.findAll();
         Set<Movie> activeMovies = new HashSet<>();
 
-        for (Show show : showList){
-            if (show.getShowTime().isAfter(LocalDateTime.now())){
+        for (Show show : showList) {
+            if (show.getShowTime().isAfter(LocalDateTime.now())) {
                 activeMovies.add(show.getMovie());
             }
         }
         return activeMovies;
     }
+
 }
 

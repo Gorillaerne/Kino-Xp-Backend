@@ -2,17 +2,18 @@ package gruppe6.kea.kinobackend.Reservation.Service;
 
 import gruppe6.kea.kinobackend.BookedSeats.Repository.IBookedSeatsRepository;
 import gruppe6.kea.kinobackend.DTO.ReservationDTO;
+import gruppe6.kea.kinobackend.DTO.TicketDTO;
 import gruppe6.kea.kinobackend.Models.*;
 import gruppe6.kea.kinobackend.Reservation.Repository.IReservationRepository;
 import gruppe6.kea.kinobackend.Show.Repository.IShowRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.proxy.EntityNotFoundDelegate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ReservationService {
@@ -33,26 +34,43 @@ public class ReservationService {
     }
 
     @Transactional
-    public Reservation createReservation(ReservationDTO dto) {
+    public Reservation createReservation(ReservationDTO dto) throws Exception {
 
-        // 1 Opretter Reservation entity
+        // Tjek om nogle af sæderne allerede er booket
+        List<BookedSeats> bookedSeatsFromShow = iBookedSeatsRepository.findAllByShow(
+                iShowRepository.findById(dto.getShowId())
+                        .orElseThrow(() -> new EntityNotFoundException("Show not found"))
+        );
 
+        for (BookedSeats bookedSeats : bookedSeatsFromShow) {
+            for (Integer seatId : dto.getSeatIds()) {
+                if (bookedSeats.getSeat().getId() == seatId) {
+                    throw new Exception("Nogle af sæderne er booket");
+                }
+            }
+        }
+
+        System.out.println("step 1 færdog");
+        // 1. Opret Reservation entity
         Reservation reservation = new Reservation();
         reservation.setName(dto.getName());
         reservation.setEmail(dto.getEmail());
         reservation.setPhoneNumber(dto.getPhoneNumber());
         reservation.setTimeOfPurchase(LocalDateTime.now());
 
-        // 2 Hent show fra DB
+        System.out.println("step 2 færdog");
+        // 2. Hent show fra DB
         Show show = iShowRepository.findById(dto.getShowId())
                 .orElseThrow(() -> new EntityNotFoundException("Show Not Found!"));
         reservation.setShow(show);
-
-        // 3 Opretter Tickets og Bookedseats
+        System.out.println("step 3 færdog");
+        // 3. Opret Tickets og BookedSeats
         if (dto.getSeatIds() != null) {
             for (int seatId : dto.getSeatIds()) {
-                Seat seat = new Seat();
-                seat.setId(seatId);
+                Seat seat = show.getTheatre().getSeatList().stream()
+                        .filter(s -> s.getId() == seatId)
+                        .findFirst()
+                        .orElseThrow(() -> new EntityNotFoundException("Seat not found"));
 
                 BookedSeats bookedSeats = new BookedSeats();
                 bookedSeats.setSeat(seat);
@@ -70,17 +88,20 @@ public class ReservationService {
                 reservation.getTicketList().add(ticket);
             }
         }
-
-        // 4 Gem reservation
+        System.out.println("step 4 færdog");
+        // 4. Gem reservation
         Reservation savedReservation = iReservationRepository.save(reservation);
-
-        // 5 Gem BookedSeats
-        for (Ticket ticket : reservation.getTicketList()) {
-                iBookedSeatsRepository.save(ticket.getBookedSeat());
+        System.out.println("step 5 færdog");
+        // 5. Gem BookedSeats
+        for (Ticket ticket : savedReservation.getTicketList()) {
+            iBookedSeatsRepository.save(ticket.getBookedSeat());
         }
 
+
+        System.out.println("Færdig");
         return savedReservation;
     }
+
 
     @Transactional
     public void deleteReservationById(int id) {
@@ -91,4 +112,6 @@ public class ReservationService {
     }
 
 
+
 }
+

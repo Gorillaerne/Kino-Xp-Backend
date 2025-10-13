@@ -30,17 +30,17 @@ public class BookedSeatsService {
     }
 
     public List<BookedSeatDTO> getBookedSeatsForShow(int showId) {
-       Show show = showRepository.findById(showId).orElseThrow(() -> new EntityNotFoundException("Kunne ikke finde show"));
-       List<BookedSeatDTO> listToReturn = new ArrayList<>();
-       for (BookedSeats bookedSeat : iBookedSeatsRepository.findAllByShow(show)){
-           BookedSeatDTO bookedSeatDTO = new BookedSeatDTO();
+        Show show = showRepository.findById(showId).orElseThrow(() -> new EntityNotFoundException("Kunne ikke finde show"));
+        List<BookedSeatDTO> listToReturn = new ArrayList<>();
+        for (BookedSeats bookedSeat : iBookedSeatsRepository.findAllByShow(show)) {
+            BookedSeatDTO bookedSeatDTO = new BookedSeatDTO();
 
-           bookedSeatDTO.setId(bookedSeat.getId());
-           bookedSeatDTO.setSeat(bookedSeat.getSeat());
-           bookedSeatDTO.setShow(bookedSeat.getShow());
-           bookedSeatDTO.setTicket(bookedSeat.getTicket());
-           listToReturn.add(bookedSeatDTO);
-       }
+            bookedSeatDTO.setId(bookedSeat.getId());
+            bookedSeatDTO.setSeat(bookedSeat.getSeat());
+            bookedSeatDTO.setShow(bookedSeat.getShow());
+            bookedSeatDTO.setTicket(bookedSeat.getTicket());
+            listToReturn.add(bookedSeatDTO);
+        }
         return listToReturn;
     }
 }

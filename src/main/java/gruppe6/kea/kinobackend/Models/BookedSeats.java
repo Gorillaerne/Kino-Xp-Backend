@@ -2,7 +2,6 @@ package gruppe6.kea.kinobackend.Models;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,12 +12,12 @@ public class BookedSeats {
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name="show_id", nullable=false)
+    @JoinColumn(name = "show_id", nullable = false)
     @JsonBackReference("show-bookedseats")
     private Show show;
 
     @ManyToOne
-    @JoinColumn(name="seat_id", nullable=false)
+    @JoinColumn(name = "seat_id", nullable = false)
     @JsonBackReference("seat_bookedseats")
     private Seat seat;
 

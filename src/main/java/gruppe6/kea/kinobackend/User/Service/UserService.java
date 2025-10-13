@@ -58,11 +58,16 @@ public class UserService {
     }
 
     public List<User> findAllUsers() {
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        users.forEach(u -> u.getCinemas().size());
+        return users;
     }
 
     public void deleteUser(int id){
-        userRepository.deleteById(id);
+        User foundUser = userRepository.findById(id).orElseThrow(() -> new BadCredentialsException("User with id: " + id + " doesnt exist"));
+        foundUser.getCinemas().forEach(cinema -> cinema.getUserList().remove(foundUser));
+        foundUser.getCinemas().clear();
+        userRepository.delete(foundUser);
     }
 
 

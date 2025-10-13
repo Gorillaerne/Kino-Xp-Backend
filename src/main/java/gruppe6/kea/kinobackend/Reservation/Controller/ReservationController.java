@@ -2,21 +2,22 @@ package gruppe6.kea.kinobackend.Reservation.Controller;
 
 import gruppe6.kea.kinobackend.DTO.ReservationDTO;
 import gruppe6.kea.kinobackend.Models.Reservation;
+import gruppe6.kea.kinobackend.Reservation.Service.EmailService;
 import gruppe6.kea.kinobackend.Reservation.Service.ReservationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/reservations")
 public class ReservationController {
 
+    private final EmailService emailService;
     private final ReservationService reservationService;
 
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(EmailService emailService, ReservationService reservationService) {
+        this.emailService = emailService;
         this.reservationService = reservationService;
     }
 
@@ -28,8 +29,14 @@ public class ReservationController {
 
     @PostMapping("")
     public ResponseEntity<Reservation> createReservations(@RequestBody ReservationDTO dto) {
-        Reservation savedReservation = reservationService.createReservation(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedReservation);
+        try {
+            Reservation savedReservation = reservationService.createReservation(dto);
+            emailService.sendTicksThroughMail(savedReservation);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedReservation);
+        } catch (Exception e) {
+            throw new RuntimeException("DET VIRKER IK");
+        }
+
     }
 
     @DeleteMapping("/{id}")
