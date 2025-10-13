@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +35,15 @@ public class EmailService {
             document.open();
 
             try {
+                InputStream logoStream = getClass().getResourceAsStream("/static/logo.png"); // inside resources
+                if (logoStream != null) {
+                    byte[] logoBytes = logoStream.readAllBytes();
+                    Image logo = Image.getInstance(logoBytes);
+                    logo.scaleToFit(150, 150);
+                    logo.setAlignment(Image.ALIGN_CENTER);
+                    document.add(logo);
+                }
                 Image moviePoster = Image.getInstance(dto.getImagePoster());
-                Image logo = Image.getInstance("src/main/resources/static/logo.png"); // path to your image
-                logo.scaleToFit(150, 150);
-                logo.setAlignment(Image.ALIGN_CENTER);
-                document.add(logo);
                 moviePoster.scaleToFit(350, 350);
                 moviePoster.setAlignment(Image.ALIGN_LEFT + 30);
                 document.add(moviePoster);
